@@ -1,0 +1,113 @@
+﻿@using PerManagerSystem.Admin.Core
+@model PerManagerSystem.Models.Sys.SysModuleModel
+@{
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+}
+<div class="mvctool bgb">
+    @Html.ToolButton("btnReturn", "icon-return", "返回",false)
+</div>
+@using (Html.BeginForm())
+{
+    <table class="fromEditTable setTextWidth300">
+        <table class="fromEditTable setTextWidth300">
+            <tbody>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.ModuleName, new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.ModuleName, new { @style = "width:200px" })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.ModuleName)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.Code, new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Code, new { @style = "width:200px" })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Code)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.ParentId, new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.ParentId, new { @style = "width:200px" })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.ParentId)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.Url, new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Url, new { @style = "width:200px" })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Url)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.Icon, new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Icon, new { @style = "width:200px" })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Icon)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.Sort, new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Sort, new { @style = "width:200px" })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Sort)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Description)
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.Enable, new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Enable)
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Enable)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </table>
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnReturn").click(function () {
+            window.parent.frameReturnByClose()
+        });
+    });
+
+</script>

@@ -1,0 +1,71 @@
+﻿@using PerManagerSystem.Admin.Core
+@{
+    Layout = "~/Views/Shared/_Index_Layout.cshtml";
+    List<string> perm = (List<string>)ViewBag.Perm;
+}
+<div id="toolbar">
+    @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)
+</div>
+<table id="dataList"></table>
+<script type="text/javascript">
+    $(function () {
+        $("#dataList").datagrid({
+            url: '/ModuleSetting/GetOperationByModuleId?moduleId=@(ViewBag.ModuleId)',
+            methord: 'post',
+            height: $(window).height() - 10,
+            fitColumns: true,
+            sortName: 'Id',
+            sortOrder: 'desc',
+            idField: 'Id',
+            pageSize: 10,
+            pageLisst: [10, 20, 30, 40],
+            pagination: true,
+            striped: true, //奇偶行是否区分
+            rownumbers: true,//行号
+            //selectOnCheck: true,
+            //checkOnSelect: true,
+            columns: [[
+                { field: 'Id', title: 'ID', width: 30, align: 'center',hidden:true },
+                { field: 'OperationName', title: '操作名称', width: 80, align: 'center' },
+                { field: 'Code', title: '标识码', width: 50, align: 'center' },
+                //{ field: 'Icon', title: '图标', width: 80, align: 'center' },
+                //{ field: 'Sort', title: '排序', width: 50, align: 'center' },
+                { field: 'Description', title: '描述', width: 160, align: 'center', align: 'center' },
+                {
+                    field: 'Flag', title: '是否分配', width: 80, checkbox: true
+                }
+
+            ]],
+            onLoadSuccess: function (data) {
+                if (data) {
+                    $.each(data.rows, function (index, item) {
+                        if (item.Flag != "0") {
+                            $('#dataList').datagrid('checkRow', index);
+                        }
+                    });
+                }
+            },
+            toolbar: "#toolbar"
+        });
+        $("#btnSave").click(function () {
+            var checkedItems = $('#dataList').datagrid('getChecked');
+            var operatIds = [];
+            $.each(checkedItems, function(index, item){
+                operatIds.push(item.Id);
+            });
+            operatIds = operatIds.join();
+            //提交数据库
+            $.post("/ModuleSetting/UpdateModuleOperationByModuleId", { moduleId: '@(ViewBag.ModuleId)', operatId: operatIds },
+             function (data) {
+                 if (data.type == 1) {
+                     window.parent.frameReturnByMes(data.message);
+                     window.parent.frameReturnByReload(true);
+                     window.parent.frameReturnByClose()
+                 }
+                 else {
+                     window.parent.frameReturnByMes(data.message);
+                 }
+             }, "json");
+        });
+    });    
+</script>

@@ -1,0 +1,66 @@
+﻿@using PerManagerSystem.Admin.Core
+@{
+    Layout = "~/Views/Shared/_Index_Layout.cshtml";
+    List<string> perm = (List<string>)ViewBag.Perm;
+}
+<div id="toolbar">
+    @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)
+</div>
+<table id="dataList"></table>
+<script type="text/javascript">
+    $(function () {
+        $("#dataList").datagrid({
+            url: '/UserManage/GetRoleListByUserId?userId=@(ViewBag.UserId)',
+            methord: 'post',
+            height: $(window).height() - 10,
+            fitColumns: true,
+            sortName: 'Id',
+            sortOrder: 'desc',
+            idField: 'Id',
+            pageSize: 10,
+            pageLisst: [10, 20, 30, 40],
+            pagination: true,
+            striped: true, //奇偶行是否区分
+            rownumbers: true,//行号
+            columns: [[
+                { field: 'Id', title: 'ID', width: 30, align: 'center', hidden: true },
+                { field: 'RoleName', title: '角色名称', width: 80, align: 'center' },
+                { field: 'Description', title: '描述', width: 160, align: 'center', align: 'center' },
+                {
+                    field: 'Flag', title: '是否分配', width: 80, checkbox: true
+                }
+
+            ]],
+            onLoadSuccess: function (data) {
+                if (data) {
+                    $.each(data.rows, function (index, item) {
+                        if (item.Flag != "0") {
+                            $('#dataList').datagrid('checkRow', index);
+                        }
+                    });
+                }
+            },
+            toolbar: "#toolbar"
+        });
+        $("#btnSave").click(function () {
+            var checkedItems = $('#dataList').datagrid('getChecked');
+            var roleIds = [];
+            $.each(checkedItems, function (index, item) {
+                roleIds.push(item.Id);
+            });
+            roleIds = roleIds.join();
+            //提交数据库
+            $.post("/UserManage/UserAllotRoleByUserId", { userId: '@(ViewBag.UserId)', roleId: roleIds },
+             function (data) {
+                 if (data.type == 1) {
+                     window.parent.frameReturnByMes(data.message);
+                     window.parent.frameReturnByReload(true);
+                     window.parent.frameReturnByClose()
+                 }
+                 else {
+                     window.parent.frameReturnByMes(data.message);
+                 }
+             }, "json");
+        });
+    });
+</script>

@@ -1,0 +1,70 @@
+﻿@using PerManagerSystem.Admin.Core
+@model PerManagerSystem.Models.Sys.SysRoleModel
+@{
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+    List<string> perm = (List<string>)ViewBag.Perm;
+}
+<div class="mvctool bgb">
+    @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)
+    @Html.ToolButton("btnReturn", "icon-return", "返回",false)
+</div>
+@using (Html.BeginForm("Edit", "RoleManage", null, FormMethod.Post, new { Id = "EditForm" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model=>model.Id);
+    @Html.HiddenFor(model => model.Created);
+    @Html.HiddenFor(model => model.Creator);                                       
+    @Html.HiddenFor(model => model.IsDelete);
+    <table class="fromEditTable setTextWidth300">
+        <tbody>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.RoleName, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.RoleName, new { @style = "width:200px" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.RoleName)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Description)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Description)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnSave").click(function () {
+            if ($("#EditForm").valid()) {
+                $.ajax({
+                    url: '/RoleManage/Edit',
+                    type: 'post',
+                    dataType: 'json',
+                    data: $('#EditForm').serialize(),
+                    success: function (data) {
+                        if (data.type == 1) {
+                            window.parent.frameReturnByMes("修改成功!");
+                            window.parent.frameReturnByReload(true);
+                            window.parent.frameReturnByClose()
+                        } else {
+                            window.parent.frameReturnByMes("修改失败!");
+                        }
+                    }
+                });
+            }
+        });
+        $("#btnReturn").click(function () {
+            window.parent.frameReturnByClose()
+        });
+    });
+</script>

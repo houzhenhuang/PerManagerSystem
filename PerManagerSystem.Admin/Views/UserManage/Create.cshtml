@@ -1,0 +1,108 @@
+﻿@using PerManagerSystem.Admin.Core
+@model PerManagerSystem.Models.Sys.SysUserModel
+@{
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+    List<string> perm = (List<string>)ViewBag.Perm;
+}
+
+<div class="mvctool bgb">
+    @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)
+    @Html.ToolButton("btnReturn", "icon-return", "返回", false)
+</div>
+@using (Html.BeginForm("Create", "UserManage", null, FormMethod.Post, new { Id = "CreateForm" }))
+{
+    <table class="fromEditTable">
+        <tbody>
+            <tr>
+               <td colspan="6">
+                   帐户信息
+               </td>
+            </tr>
+            <tr>
+                <td style="width:78px; text-align:right;">
+                    @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
+                </td>
+                <td style="width:150px;">
+                    @Html.EditorFor(model => model.UserName, new { @style = "width:130px" })
+                </td>
+                @*<td>
+                    @Html.ValidationMessageFor(model => model.UserName)
+                </td>*@
+                <td style="width: 80px; text-align: right;">
+                    @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+                </td>
+                <td colspan="3">
+                    @Html.EditorFor(model => model.Password, new { @style = "width:130px" })
+                </td>                
+            </tr> 
+            <tr>
+                <td style="width: 80px; text-align: right;">
+                    @Html.LabelFor(model => model.DepartmentId, new { @class = "control-label col-md-2" })
+                </td>
+                <td style="width:150px;">
+                    @Html.EditorFor(model => model.DepartmentId, new { @style = "width:130px" })
+                </td>
+                <td style="width: 80px; text-align: right;">
+                    @Html.LabelFor(model => model.PostId, new { @class = "control-label col-md-2" })
+                </td>
+                <td style="width:150px;">
+                    @Html.EditorFor(model => model.PostId, new { @style = "width:130px" })
+                </td>
+                <td style="width: 80px; text-align: right;">
+                    @Html.LabelFor(model => model.State, new { @class = "control-label col-md-2" })
+                </td>
+                <td style="width:150px;">
+                    @Html.EditorFor(model => model.State, new { @style = "width:130px" })
+                </td>
+            </tr> 
+            <tr>
+                <td colspan="6">
+                    基本资料
+                </td>
+            </tr>   
+            <tr>
+                <td style="width:80px; text-align:right;">
+                    @Html.LabelFor(model => model.TrueName, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.TrueName, new { @style = "width:130px" })
+                </td>
+                <td style="width: 80px; text-align: right;">
+                    @Html.LabelFor(model => model.Sex, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Sex, new { @style = "width:130px" })
+                </td>
+                <td colspan="2">
+                    
+                </td>
+            </tr>      
+        </tbody>
+    </table>
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnSave").click(function () {
+            if ($("#CreateForm").valid()) {
+                $.ajax({
+                    url: '/UserManage/Create',
+                    type: 'post',
+                    dataType: 'json',
+                    data: $('#CreateForm').serialize(),
+                    success: function (data) {
+                        if (data.type == 1) {
+                            window.parent.frameReturnByMes(data.message);
+                            window.parent.frameReturnByReload(true);
+                            window.parent.frameReturnByClose()
+                        } else {
+                            window.parent.frameReturnByMes(data.message);
+                        }
+                    }
+                });
+            }
+        });
+        $("#btnReturn").click(function () {
+            window.parent.frameReturnByClose()
+        });
+    });
+</script>

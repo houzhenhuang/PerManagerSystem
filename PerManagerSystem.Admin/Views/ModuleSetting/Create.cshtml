@@ -1,0 +1,168 @@
+﻿@using PerManagerSystem.Admin.Core
+@model PerManagerSystem.Models.Sys.SysModuleModel
+@{
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+    List<string> perm = (List<string>)ViewBag.Perm;
+    if (perm==null)
+    {
+        perm = new List<string>();
+    }
+}
+
+<div class="mvctool bgb">
+    @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)
+    @Html.ToolButton("btnReturn", "icon-return", "返回", false)
+</div>
+@using (Html.BeginForm("Create", "ModuleSetting", null, FormMethod.Post, new { Id = "CreateForm" }))
+{
+    <table class="fromEditTable setTextWidth300">
+        <tbody>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.ModuleName, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ModuleName, new { @style = "width:200px" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.ModuleName)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Code, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Code, new { @style = "width:200px" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Code)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.ParentId, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.HiddenFor(m=>m.ParentId)
+                    <input id="ParentModule"  value="" type="text">
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.ParentId)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Url, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Url, new { @style = "width:200px" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Url)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Icon, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.HiddenFor(model => model.Icon)
+                    <a href="javascript:void(0)" id="btnIcon" class="easyui-linkbutton" iconcls="@Model.Icon" plain="true"> </a>
+                    <div id="iconList" style="width: 500px; height: 150px; border: 1px solid #ccc; position: absolute; background-color: white; overflow-y: auto;display:none">
+                    </div>
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Icon)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Sort, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Sort, new { @style = "width:200px" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Sort)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Description)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Description)
+                </td>
+            </tr> 
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Enable, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Enable)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Enable)
+                </td>
+            </tr>               
+        </tbody>
+    </table>
+}
+<script type="text/javascript">
+    $(function () {
+        $('#ParentModule').combotree({
+            url: '/ModuleSetting/GetComboTreeList',
+            onClick: function (node) {
+                $("#ParentId").val(node.id);
+            }
+        });
+        $("#btnSave").click(function () {
+            if ($("#CreateForm").valid()) {
+                $.ajax({
+                    url: '/ModuleSetting/Create',
+                    type: 'post',
+                    dataType: 'json',
+                    data: $('#CreateForm').serialize(),
+                    success: function (data) {
+                        if (data.type == 1) {
+                            window.parent.frameReturnByMes(data.message);
+                            window.parent.frameReturnByReload(true);
+                            window.parent.frameReturnByClose()
+                        } else {
+                            window.parent.frameReturnByMes(data.message);
+                        }
+                    }
+                });
+            }
+        });
+        $("#btnReturn").click(function () {
+            window.parent.frameReturnByClose()
+        });
+        $("#btnIcon").click(function () {
+            $("#iconList").show("normal");
+            $.post("/IconManager/GetIconList", function (data) {
+                if (data.length > 0) {
+                    $.each(data, function (index, v) {
+                        $("#iconList").append(' <a href="javascript:void(0)" onclick="HidIconList(this)" class="easyui-linkbutton l-btn l-btn-small l-btn-plain" iconcls="' + v.Code + '" plain="true" group="" id="' + v.Code + '"><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon ' + v.Code + '">&nbsp;</span></span></a>');
+                    });
+                }
+            }, 'json');
+        });
+    });
+    function HidIconList(t) {
+        if ($("#btnIcon").attr("iconcls") == "" || $("#btnIcon").attr("iconcls") == undefined) {
+            $("#btnIcon").find("span:first").attr("class", "l-btn-left l-btn-icon-left ");
+            $("#btnIcon").find("span:first").append('<span class="l-btn-icon ' + $(t).attr("id") + '">&nbsp;</span>');
+        } else {
+            $("#btnIcon").find("span").find("span").eq(1).attr("class", "l-btn-icon " + $(t).attr("id"))
+        }
+        $("#btnIcon").attr("iconcls", $(t).attr("id"))
+        $("#Icon").val($(t).attr("id"));
+        $("#iconList").hide("normal");
+        $("#iconList").html("");
+    }
+</script>

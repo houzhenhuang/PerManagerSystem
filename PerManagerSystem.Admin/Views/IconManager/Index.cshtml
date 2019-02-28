@@ -1,0 +1,49 @@
+﻿@using PerManagerSystem.Admin.Core
+@using PerManagerSystem.Models
+@model List<Icon>
+@{
+    Layout = "~/Views/Shared/_Index_Layout.cshtml";
+    List<string> perm = (List<string>)ViewBag.Perm;
+    if (perm == null)
+    {
+        perm = new List<string>();
+    }
+}
+<link href="~/Content/Images/icon.css" rel="stylesheet" />
+@if (Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="@item.Code" plain="true"> </a>
+    }
+
+}
+
+
+
+
+        @*@Html.ToolButton("btnSave", "icon-save", "加载到数据库", false)
+            <script type="text/javascript">
+                $(function () {
+                    $("#btnSave").click(function () {
+                            $.ajax({
+                                url: '/IconManager/Create',
+                                type: 'post',
+                                dataType: 'json',
+                                //data: $('#CreateForm').serialize(),
+                                success: function (data) {
+                                    if (data.type == 1) {
+                                        window.parent.frameReturnByMes(data.message);
+                                        window.parent.frameReturnByReload(true);
+                                        window.parent.frameReturnByClose()
+                                    } else {
+                                        window.parent.frameReturnByMes(data.message);
+                                    }
+                                }
+                            });
+                    });
+                    $("#btnReturn").click(function () {
+                        window.parent.frameReturnByClose()
+                    });
+                });
+            </script>*@

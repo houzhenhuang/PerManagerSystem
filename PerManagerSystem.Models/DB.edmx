@@ -1,0 +1,1184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Principal" Type="int" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Creator" Type="int" />
+        </EntityType>
+        <EntityType Name="Icon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Creator" Type="int" />
+        </EntityType>
+        <EntityType Name="SysException">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="HelpLink" Type="varchar" MaxLength="500" />
+          <Property Name="Message" Type="varchar" MaxLength="500" />
+          <Property Name="Source" Type="varchar" MaxLength="500" />
+          <Property Name="StackTrace" Type="text" />
+          <Property Name="TargetSite" Type="varchar" MaxLength="500" />
+          <Property Name="Data" Type="varchar" MaxLength="500" />
+          <Property Name="OperateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SysLoginLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="UserIp" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="IfSuccess" Type="bit" Nullable="false" />
+          <Property Name="LoginDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SysModule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="Url" Type="varchar" MaxLength="100" />
+          <Property Name="Icon" Type="varchar" MaxLength="50" />
+          <Property Name="Sort" Type="int" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="4000" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Creator" Type="int" />
+        </EntityType>
+        <EntityType Name="SysModuleOperations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="OperationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysOperations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="Icon" Type="varchar" MaxLength="50" />
+          <Property Name="Sort" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="3000" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Creator" Type="int" />
+        </EntityType>
+        <EntityType Name="SysRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="4000" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Creator" Type="int" />
+        </EntityType>
+        <EntityType Name="SysRoleModuleOperations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="OperationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysSample">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Bir" Type="datetime" />
+          <Property Name="Photo" Type="varchar" MaxLength="50" />
+          <Property Name="Note" Type="text" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SysUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TrueName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Sex" Type="varchar" MaxLength="10" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="200" />
+          <Property Name="QQ" Type="varchar" MaxLength="50" />
+          <Property Name="OtherContact" Type="varchar" MaxLength="200" />
+          <Property Name="Province" Type="varchar" MaxLength="200" />
+          <Property Name="City" Type="varchar" MaxLength="200" />
+          <Property Name="Street" Type="varchar" MaxLength="200" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="State" Type="bit" />
+          <Property Name="Birthday" Type="datetime" />
+          <Property Name="Marital" Type="varchar" MaxLength="10" />
+          <Property Name="Political" Type="varchar" MaxLength="50" />
+          <Property Name="Nationality" Type="varchar" MaxLength="20" />
+          <Property Name="School" Type="varchar" MaxLength="50" />
+          <Property Name="Professional" Type="varchar" MaxLength="100" />
+          <Property Name="Degree" Type="varchar" MaxLength="20" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="JobState" Type="varchar" MaxLength="20" />
+          <Property Name="Photo" Type="varchar" MaxLength="200" />
+          <Property Name="Attach" Type="varchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="4000" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Creator" Type="int" />
+        </EntityType>
+        <EntityType Name="SysUserOperateLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="UserIp" Type="varchar" MaxLength="50" />
+          <Property Name="OperateInfo" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="IfSuccess" Type="bit" Nullable="false" />
+          <Property Name="OperateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SysUserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__SysExcept__UserI__5070F446">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="0..1" />
+          <End Role="SysException" Type="Self.SysException" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysException">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysLoginL__UserI__44FF419A">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="0..1" />
+          <End Role="SysLoginLog" Type="Self.SysLoginLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysLoginLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysModule__Modul__1DE57479">
+          <End Role="SysModule" Type="Self.SysModule" Multiplicity="1" />
+          <End Role="SysModuleOperations" Type="Self.SysModuleOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysModule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysModuleOperations">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysModule__Opera__1ED998B2">
+          <End Role="SysOperations" Type="Self.SysOperations" Multiplicity="1" />
+          <End Role="SysModuleOperations" Type="Self.SysModuleOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysOperations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysModuleOperations">
+              <PropertyRef Name="OperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysRoleMo__Modul__24927208">
+          <End Role="SysModule" Type="Self.SysModule" Multiplicity="1" />
+          <End Role="SysRoleModuleOperations" Type="Self.SysRoleModuleOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysModule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleModuleOperations">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysRoleMo__Opera__25869641">
+          <End Role="SysOperations" Type="Self.SysOperations" Multiplicity="1" />
+          <End Role="SysRoleModuleOperations" Type="Self.SysRoleModuleOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysOperations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleModuleOperations">
+              <PropertyRef Name="OperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysRoleMo__RoleI__239E4DCF">
+          <End Role="SysRole" Type="Self.SysRole" Multiplicity="1" />
+          <End Role="SysRoleModuleOperations" Type="Self.SysRoleModuleOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleModuleOperations">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysUserOp__UserI__4AB81AF0">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="0..1" />
+          <End Role="SysUserOperateLog" Type="Self.SysUserOperateLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserOperateLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysUserRo__RoleI__0F975522">
+          <End Role="SysRole" Type="Self.SysRole" Multiplicity="1" />
+          <End Role="SysUserRole" Type="Self.SysUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysUserRo__UserI__0EA330E9">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="SysUserRole" Type="Self.SysUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="P_Sys_DeleteModuleOperation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="moduleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="P_Sys_DeleteRoleModuleOpera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="roleId" Type="int" Mode="In" />
+          <Parameter Name="moduleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="P_Sys_DeleteUserRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="P_Sys_GetModuleByConn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="moduleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="P_Sys_GetModuleByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="P_Sys_GetOperationByModuleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="moduleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="P_Sys_GetPermByRoleAndModule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="roleId" Type="int" Mode="In" />
+          <Parameter Name="moduleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="P_SyS_GetPermission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="controller" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="P_Sys_GetRoleListByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="P_Sys_RolePermSet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="roleId" Type="int" Mode="In" />
+          <Parameter Name="moduleId" Type="int" Mode="In" />
+          <Parameter Name="operatId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="P_Sys_SysModuleAllotOperation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="operationId" Type="int" Mode="In" />
+          <Parameter Name="moduleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="P_Sys_UserAllotRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="roleId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="DBStoreContainer">
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Icon" EntityType="Self.Icon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysException" EntityType="Self.SysException" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysLoginLog" EntityType="Self.SysLoginLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysModule" EntityType="Self.SysModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysModuleOperations" EntityType="Self.SysModuleOperations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysOperations" EntityType="Self.SysOperations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysRole" EntityType="Self.SysRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysRoleModuleOperations" EntityType="Self.SysRoleModuleOperations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysSample" EntityType="Self.SysSample" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysUser" EntityType="Self.SysUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysUserOperateLog" EntityType="Self.SysUserOperateLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysUserRole" EntityType="Self.SysUserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__SysExcept__UserI__5070F446" Association="Self.FK__SysExcept__UserI__5070F446">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysException" EntitySet="SysException" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysLoginL__UserI__44FF419A" Association="Self.FK__SysLoginL__UserI__44FF419A">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysLoginLog" EntitySet="SysLoginLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysModule__Modul__1DE57479" Association="Self.FK__SysModule__Modul__1DE57479">
+            <End Role="SysModule" EntitySet="SysModule" />
+            <End Role="SysModuleOperations" EntitySet="SysModuleOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysModule__Opera__1ED998B2" Association="Self.FK__SysModule__Opera__1ED998B2">
+            <End Role="SysOperations" EntitySet="SysOperations" />
+            <End Role="SysModuleOperations" EntitySet="SysModuleOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysRoleMo__Modul__24927208" Association="Self.FK__SysRoleMo__Modul__24927208">
+            <End Role="SysModule" EntitySet="SysModule" />
+            <End Role="SysRoleModuleOperations" EntitySet="SysRoleModuleOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysRoleMo__Opera__25869641" Association="Self.FK__SysRoleMo__Opera__25869641">
+            <End Role="SysOperations" EntitySet="SysOperations" />
+            <End Role="SysRoleModuleOperations" EntitySet="SysRoleModuleOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysRoleMo__RoleI__239E4DCF" Association="Self.FK__SysRoleMo__RoleI__239E4DCF">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysRoleModuleOperations" EntitySet="SysRoleModuleOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysUserOp__UserI__4AB81AF0" Association="Self.FK__SysUserOp__UserI__4AB81AF0">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserOperateLog" EntitySet="SysUserOperateLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysUserRo__RoleI__0F975522" Association="Self.FK__SysUserRo__RoleI__0F975522">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysUserRole" EntitySet="SysUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysUserRo__UserI__0EA330E9" Association="Self.FK__SysUserRo__UserI__0EA330E9">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserRole" EntitySet="SysUserRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SysSample" EntityType="DB.SysSample" />
+          <EntitySet Name="Department" EntityType="DB.Department" />
+          <EntitySet Name="SysException" EntityType="DB.SysException" />
+          <EntitySet Name="SysLoginLog" EntityType="DB.SysLoginLog" />
+          <EntitySet Name="SysModule" EntityType="DB.SysModule" />
+          <EntitySet Name="SysModuleOperations" EntityType="DB.SysModuleOperations" />
+          <EntitySet Name="SysOperations" EntityType="DB.SysOperations" />
+          <EntitySet Name="SysRole" EntityType="DB.SysRole" />
+          <EntitySet Name="SysRoleModuleOperations" EntityType="DB.SysRoleModuleOperations" />
+          <EntitySet Name="SysUser" EntityType="DB.SysUser" />
+          <EntitySet Name="SysUserOperateLog" EntityType="DB.SysUserOperateLog" />
+          <EntitySet Name="SysUserRole" EntityType="DB.SysUserRole" />
+          <AssociationSet Name="FK__SysExcept__UserI__5070F446" Association="DB.FK__SysExcept__UserI__5070F446">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysException" EntitySet="SysException" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysLoginL__UserI__44FF419A" Association="DB.FK__SysLoginL__UserI__44FF419A">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysLoginLog" EntitySet="SysLoginLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysModule__Modul__1DE57479" Association="DB.FK__SysModule__Modul__1DE57479">
+            <End Role="SysModule" EntitySet="SysModule" />
+            <End Role="SysModuleOperations" EntitySet="SysModuleOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysRoleMo__Modul__24927208" Association="DB.FK__SysRoleMo__Modul__24927208">
+            <End Role="SysModule" EntitySet="SysModule" />
+            <End Role="SysRoleModuleOperations" EntitySet="SysRoleModuleOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysModule__Opera__1ED998B2" Association="DB.FK__SysModule__Opera__1ED998B2">
+            <End Role="SysOperations" EntitySet="SysOperations" />
+            <End Role="SysModuleOperations" EntitySet="SysModuleOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysRoleMo__Opera__25869641" Association="DB.FK__SysRoleMo__Opera__25869641">
+            <End Role="SysOperations" EntitySet="SysOperations" />
+            <End Role="SysRoleModuleOperations" EntitySet="SysRoleModuleOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysRoleMo__RoleI__239E4DCF" Association="DB.FK__SysRoleMo__RoleI__239E4DCF">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysRoleModuleOperations" EntitySet="SysRoleModuleOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysUserRo__RoleI__0F975522" Association="DB.FK__SysUserRo__RoleI__0F975522">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysUserRole" EntitySet="SysUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysUserOp__UserI__4AB81AF0" Association="DB.FK__SysUserOp__UserI__4AB81AF0">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserOperateLog" EntitySet="SysUserOperateLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SysUserRo__UserI__0EA330E9" Association="DB.FK__SysUserRo__UserI__0EA330E9">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserRole" EntitySet="SysUserRole" />
+          </AssociationSet>
+          <FunctionImport Name="P_Sys_GetModuleByConn" ReturnType="Collection(DB.P_Sys_GetModuleByConn_Result)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="moduleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="P_SyS_GetPermission" ReturnType="Collection(String)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="controller" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="P_Sys_GetOperationByModuleId" ReturnType="Collection(DB.P_Sys_GetOperationByModuleId_Result)">
+          <Parameter Name="moduleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="P_Sys_DeleteModuleOperation">
+          <Parameter Name="moduleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="P_Sys_SysModuleAllotOperation">
+            <Parameter Name="operationId" Mode="In" Type="Int32" />
+            <Parameter Name="moduleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="P_Sys_GetPermByRoleAndModule" ReturnType="Collection(DB.P_Sys_GetPermByRoleAndModule_Result)">
+            <Parameter Name="roleId" Mode="In" Type="Int32" />
+            <Parameter Name="moduleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="P_Sys_DeleteRoleModuleOpera">
+            <Parameter Name="roleId" Mode="In" Type="Int32" />
+            <Parameter Name="moduleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="P_Sys_RolePermSet">
+            <Parameter Name="roleId" Mode="In" Type="Int32" />
+            <Parameter Name="moduleId" Mode="In" Type="Int32" />
+            <Parameter Name="operatId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="P_Sys_DeleteUserRole">
+          <Parameter Name="userId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="P_Sys_UserAllotRole">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="roleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="P_Sys_GetRoleListByUserId" ReturnType="Collection(DB.P_Sys_GetRoleListByUserId_Result)">
+          <Parameter Name="userId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="P_Sys_GetModuleByUserId" ReturnType="Collection(DB.P_Sys_GetModuleByUserId_Result)">
+          <Parameter Name="userId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Icon" EntityType="DB.Icon" />
+        </EntityContainer>
+        <EntityType Name="SysSample">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Bir" Type="DateTime" Precision="3" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Principal" Type="Int32" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Creator" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SysException">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="HelpLink" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Source" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TargetSite" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OperateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SysUser" Relationship="DB.FK__SysExcept__UserI__5070F446" FromRole="SysException" ToRole="SysUser" />
+        </EntityType>
+        <EntityType Name="SysLoginLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IfSuccess" Type="Boolean" Nullable="false" />
+          <Property Name="LoginDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SysUser" Relationship="DB.FK__SysLoginL__UserI__44FF419A" FromRole="SysLoginLog" ToRole="SysUser" />
+        </EntityType>
+        <EntityType Name="SysModule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="Int32" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Creator" Type="Int32" />
+          <NavigationProperty Name="SysModuleOperations" Relationship="DB.FK__SysModule__Modul__1DE57479" FromRole="SysModule" ToRole="SysModuleOperations" />
+          <NavigationProperty Name="SysRoleModuleOperations" Relationship="DB.FK__SysRoleMo__Modul__24927208" FromRole="SysModule" ToRole="SysRoleModuleOperations" />
+        </EntityType>
+        <EntityType Name="SysModuleOperations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="OperationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SysModule" Relationship="DB.FK__SysModule__Modul__1DE57479" FromRole="SysModuleOperations" ToRole="SysModule" />
+          <NavigationProperty Name="SysOperations" Relationship="DB.FK__SysModule__Opera__1ED998B2" FromRole="SysModuleOperations" ToRole="SysOperations" />
+        </EntityType>
+        <EntityType Name="SysOperations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Creator" Type="Int32" />
+          <NavigationProperty Name="SysModuleOperations" Relationship="DB.FK__SysModule__Opera__1ED998B2" FromRole="SysOperations" ToRole="SysModuleOperations" />
+          <NavigationProperty Name="SysRoleModuleOperations" Relationship="DB.FK__SysRoleMo__Opera__25869641" FromRole="SysOperations" ToRole="SysRoleModuleOperations" />
+        </EntityType>
+        <EntityType Name="SysRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Creator" Type="Int32" />
+          <NavigationProperty Name="SysRoleModuleOperations" Relationship="DB.FK__SysRoleMo__RoleI__239E4DCF" FromRole="SysRole" ToRole="SysRoleModuleOperations" />
+          <NavigationProperty Name="SysUserRole" Relationship="DB.FK__SysUserRo__RoleI__0F975522" FromRole="SysRole" ToRole="SysUserRole" />
+        </EntityType>
+        <EntityType Name="SysRoleModuleOperations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="OperationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SysModule" Relationship="DB.FK__SysRoleMo__Modul__24927208" FromRole="SysRoleModuleOperations" ToRole="SysModule" />
+          <NavigationProperty Name="SysOperations" Relationship="DB.FK__SysRoleMo__Opera__25869641" FromRole="SysRoleModuleOperations" ToRole="SysOperations" />
+          <NavigationProperty Name="SysRole" Relationship="DB.FK__SysRoleMo__RoleI__239E4DCF" FromRole="SysRoleModuleOperations" ToRole="SysRole" />
+        </EntityType>
+        <EntityType Name="SysUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrueName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="QQ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OtherContact" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Province" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Street" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="Marital" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Political" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="School" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Professional" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Degree" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="JobState" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Attach" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Creator" Type="Int32" />
+          <NavigationProperty Name="SysException" Relationship="DB.FK__SysExcept__UserI__5070F446" FromRole="SysUser" ToRole="SysException" />
+          <NavigationProperty Name="SysLoginLog" Relationship="DB.FK__SysLoginL__UserI__44FF419A" FromRole="SysUser" ToRole="SysLoginLog" />
+          <NavigationProperty Name="SysUserOperateLog" Relationship="DB.FK__SysUserOp__UserI__4AB81AF0" FromRole="SysUser" ToRole="SysUserOperateLog" />
+          <NavigationProperty Name="SysUserRole" Relationship="DB.FK__SysUserRo__UserI__0EA330E9" FromRole="SysUser" ToRole="SysUserRole" />
+        </EntityType>
+        <EntityType Name="SysUserOperateLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OperateInfo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IfSuccess" Type="Boolean" Nullable="false" />
+          <Property Name="OperateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SysUser" Relationship="DB.FK__SysUserOp__UserI__4AB81AF0" FromRole="SysUserOperateLog" ToRole="SysUser" />
+        </EntityType>
+        <EntityType Name="SysUserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SysRole" Relationship="DB.FK__SysUserRo__RoleI__0F975522" FromRole="SysUserRole" ToRole="SysRole" />
+          <NavigationProperty Name="SysUser" Relationship="DB.FK__SysUserRo__UserI__0EA330E9" FromRole="SysUserRole" ToRole="SysUser" />
+        </EntityType>
+        <Association Name="FK__SysExcept__UserI__5070F446">
+          <End Type="DB.SysUser" Role="SysUser" Multiplicity="0..1" />
+          <End Type="DB.SysException" Role="SysException" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysException">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysLoginL__UserI__44FF419A">
+          <End Type="DB.SysUser" Role="SysUser" Multiplicity="0..1" />
+          <End Type="DB.SysLoginLog" Role="SysLoginLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysLoginLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysModule__Modul__1DE57479">
+          <End Type="DB.SysModule" Role="SysModule" Multiplicity="1" />
+          <End Type="DB.SysModuleOperations" Role="SysModuleOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysModule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysModuleOperations">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysRoleMo__Modul__24927208">
+          <End Type="DB.SysModule" Role="SysModule" Multiplicity="1" />
+          <End Type="DB.SysRoleModuleOperations" Role="SysRoleModuleOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysModule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleModuleOperations">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysModule__Opera__1ED998B2">
+          <End Type="DB.SysOperations" Role="SysOperations" Multiplicity="1" />
+          <End Type="DB.SysModuleOperations" Role="SysModuleOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysOperations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysModuleOperations">
+              <PropertyRef Name="OperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysRoleMo__Opera__25869641">
+          <End Type="DB.SysOperations" Role="SysOperations" Multiplicity="1" />
+          <End Type="DB.SysRoleModuleOperations" Role="SysRoleModuleOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysOperations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleModuleOperations">
+              <PropertyRef Name="OperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysRoleMo__RoleI__239E4DCF">
+          <End Type="DB.SysRole" Role="SysRole" Multiplicity="1" />
+          <End Type="DB.SysRoleModuleOperations" Role="SysRoleModuleOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleModuleOperations">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysUserRo__RoleI__0F975522">
+          <End Type="DB.SysRole" Role="SysRole" Multiplicity="1" />
+          <End Type="DB.SysUserRole" Role="SysUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysUserOp__UserI__4AB81AF0">
+          <End Type="DB.SysUser" Role="SysUser" Multiplicity="0..1" />
+          <End Type="DB.SysUserOperateLog" Role="SysUserOperateLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserOperateLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SysUserRo__UserI__0EA330E9">
+          <End Type="DB.SysUser" Role="SysUser" Multiplicity="1" />
+          <End Type="DB.SysUserRole" Role="SysUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="P_Sys_GetModuleByConn_Result">
+          <Property Type="String" Name="ModuleName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ModuleId" Nullable="false" />
+          <Property Type="Int32" Name="ParentId" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Icon" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Sort" Nullable="true" />
+          <Property Type="Boolean" Name="Enable" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="4000" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="true" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Creator" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="P_Sys_GetOperationByModuleId_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="OperationName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Icon" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Sort" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="3000" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="true" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Creator" Nullable="true" />
+          <Property Type="Int32" Name="Flag" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="P_Sys_GetPermByRoleAndModule_Result">
+          <Property Type="Int32" Name="ModuleId" Nullable="false" />
+          <Property Type="Int32" Name="OperationId" Nullable="false" />
+          <Property Type="String" Name="ModuleName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="OperationName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IsAuthor" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="P_Sys_GetRoleListByUserId_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="4000" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="true" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Creator" Nullable="true" />
+          <Property Type="Int32" Name="Flag" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="P_Sys_GetModuleByUserId_Result">
+          <Property Type="String" Name="ModuleName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ModuleId" Nullable="false" />
+          <Property Type="Int32" Name="ParentId" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Icon" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Sort" Nullable="true" />
+          <Property Type="Boolean" Name="Enable" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="4000" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="true" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Creator" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Icon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Creator" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="DB" />
+        <Alias Key="Target" Value="DB.Store" />
+        <EntityContainerMapping CdmEntityContainer="DBContainer" StorageEntityContainer="DBStoreContainer">
+          <EntitySetMapping Name="SysSample">
+            <EntityTypeMapping TypeName="DB.SysSample">
+              <MappingFragment StoreEntitySet="SysSample">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Bir" ColumnName="Bir" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="DB.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Principal" ColumnName="Principal" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysException">
+            <EntityTypeMapping TypeName="DB.SysException">
+              <MappingFragment StoreEntitySet="SysException">
+                <ScalarProperty Name="OperateTime" ColumnName="OperateTime" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="TargetSite" ColumnName="TargetSite" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="HelpLink" ColumnName="HelpLink" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysLoginLog">
+            <EntityTypeMapping TypeName="DB.SysLoginLog">
+              <MappingFragment StoreEntitySet="SysLoginLog">
+                <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
+                <ScalarProperty Name="IfSuccess" ColumnName="IfSuccess" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="UserIp" ColumnName="UserIp" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysModule">
+            <EntityTypeMapping TypeName="DB.SysModule">
+              <MappingFragment StoreEntitySet="SysModule">
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysModuleOperations">
+            <EntityTypeMapping TypeName="DB.SysModuleOperations">
+              <MappingFragment StoreEntitySet="SysModuleOperations">
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysOperations">
+            <EntityTypeMapping TypeName="DB.SysOperations">
+              <MappingFragment StoreEntitySet="SysOperations">
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="OperationName" ColumnName="OperationName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysRole">
+            <EntityTypeMapping TypeName="DB.SysRole">
+              <MappingFragment StoreEntitySet="SysRole">
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysRoleModuleOperations">
+            <EntityTypeMapping TypeName="DB.SysRoleModuleOperations">
+              <MappingFragment StoreEntitySet="SysRoleModuleOperations">
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysUser">
+            <EntityTypeMapping TypeName="DB.SysUser">
+              <MappingFragment StoreEntitySet="SysUser">
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Attach" ColumnName="Attach" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="JobState" ColumnName="JobState" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="Professional" ColumnName="Professional" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Political" ColumnName="Political" />
+                <ScalarProperty Name="Marital" ColumnName="Marital" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="OtherContact" ColumnName="OtherContact" />
+                <ScalarProperty Name="QQ" ColumnName="QQ" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="TrueName" ColumnName="TrueName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysUserOperateLog">
+            <EntityTypeMapping TypeName="DB.SysUserOperateLog">
+              <MappingFragment StoreEntitySet="SysUserOperateLog">
+                <ScalarProperty Name="OperateDate" ColumnName="OperateDate" />
+                <ScalarProperty Name="IfSuccess" ColumnName="IfSuccess" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OperateInfo" ColumnName="OperateInfo" />
+                <ScalarProperty Name="UserIp" ColumnName="UserIp" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysUserRole">
+            <EntityTypeMapping TypeName="DB.SysUserRole">
+              <MappingFragment StoreEntitySet="SysUserRole">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="P_Sys_GetModuleByConn" FunctionName="DB.Store.P_Sys_GetModuleByConn">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB.P_Sys_GetModuleByConn_Result">
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="P_SyS_GetPermission" FunctionName="DB.Store.P_SyS_GetPermission" />
+          <FunctionImportMapping FunctionImportName="P_Sys_GetOperationByModuleId" FunctionName="DB.Store.P_Sys_GetOperationByModuleId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB.P_Sys_GetOperationByModuleId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OperationName" ColumnName="OperationName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="P_Sys_DeleteModuleOperation" FunctionName="DB.Store.P_Sys_DeleteModuleOperation" />
+          <FunctionImportMapping FunctionImportName="P_Sys_SysModuleAllotOperation" FunctionName="DB.Store.P_Sys_SysModuleAllotOperation" />
+          <FunctionImportMapping FunctionImportName="P_Sys_GetPermByRoleAndModule" FunctionName="DB.Store.P_Sys_GetPermByRoleAndModule">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB.P_Sys_GetPermByRoleAndModule_Result">
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="OperationName" ColumnName="OperationName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IsAuthor" ColumnName="IsAuthor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="P_Sys_DeleteRoleModuleOpera" FunctionName="DB.Store.P_Sys_DeleteRoleModuleOpera" />
+          <FunctionImportMapping FunctionImportName="P_Sys_RolePermSet" FunctionName="DB.Store.P_Sys_RolePermSet" />
+          <FunctionImportMapping FunctionImportName="P_Sys_DeleteUserRole" FunctionName="DB.Store.P_Sys_DeleteUserRole" />
+          <FunctionImportMapping FunctionImportName="P_Sys_UserAllotRole" FunctionName="DB.Store.P_Sys_UserAllotRole" />
+          <FunctionImportMapping FunctionImportName="P_Sys_GetRoleListByUserId" FunctionName="DB.Store.P_Sys_GetRoleListByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB.P_Sys_GetRoleListByUserId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="P_Sys_GetModuleByUserId" FunctionName="DB.Store.P_Sys_GetModuleByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB.P_Sys_GetModuleByUserId_Result">
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Icon">
+            <EntityTypeMapping TypeName="DB.Icon">
+              <MappingFragment StoreEntitySet="Icon">
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
